@@ -1,17 +1,17 @@
 //definicao das structs
 
-typedef struct data{
+typedef struct{
     int dia, mes, ano;
 }Data;
 
-typedef struct pessoa{
-    char nome[128];
-    char cpf[15];
+typedef struct{
+    char nome[100];
+    char cpf[20];
     Data data_nasc;
     char telefone[20];
 }Pessoa;
 
-typedef struct terrenos{
+typedef struct{
     int id;
     Pessoa dono;
     Data data_compra;
@@ -19,6 +19,11 @@ typedef struct terrenos{
 }Terrenos;
 
 //funcoes
+/**
+ * @brief Inicializa o vetor de ponteiros para a struct Terrenos com NULL
+ * 
+ * @param terrenos struct contendo as informacoes de cada terreno
+ */
 void inicializarVetor(Terrenos ** terrenos);
 void criarTerreno(Terrenos ** terrenos);
 void deletarTerreno(Terrenos ** terrenos);
