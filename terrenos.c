@@ -67,3 +67,40 @@ void criarTerreno(Terrenos ** terrenos){
 
     printf("\nO terreno foi cadastrado com sucesso.");
 }
+
+void deletarTerreno(Terrenos ** terrenos){//Lucas
+
+}
+
+void mostrarTerreno(Terrenos ** terrenos, int id){//Sarah Cristina
+
+}
+
+void editarTerreno(Terrenos ** terrenos, int id){//Sarah Cristina
+
+}
+
+double calcularValorTerreno(Terrenos ** terrenos, int id){//Sara Raquel
+
+}
+
+int contarTerrenosOcupados(Terrenos ** terrenos){//Sara Raquel
+
+}
+
+int contarTerrenosLivres(Terrenos ** terrenos){//Sara Raquel
+
+}
+
+double calcularValorTotal(Terrenos ** terrenos){//Sara Raquel
+
+}
+
+void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){//Lucas
+
+}
+
+void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){//Lucas
+
+
+}
