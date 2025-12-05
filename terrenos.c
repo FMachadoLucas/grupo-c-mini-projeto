@@ -81,7 +81,16 @@ void editarTerreno(Terrenos ** terrenos, int id){//Sarah Cristina
 }
 
 double calcularValorTerreno(Terrenos ** terrenos, int id){//Sara Raquel
+    int indice = id - 1;
+    
+    if (indice < 0 || indice > 99) 
+        return 0;
+    
+    if (terrenos[indice] == NULL)
+    return 0;
 
+    double valor = terrenos[indice]->area * terrenos[indice]->preco_m2;
+    return valor;
 }
 
 int contarTerrenosOcupados(Terrenos ** terrenos){//Sara Raquel
