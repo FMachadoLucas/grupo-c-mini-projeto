@@ -118,7 +118,15 @@ int contarTerrenosLivres(Terrenos ** terrenos){//Sara Raquel
 }
 
 double calcularValorTotal(Terrenos ** terrenos){//Sara Raquel
+    double total = 0;
+    int i;
 
+    for (i = 0; i < 100; i++) {
+        if (terrenos[i] != NULL) {
+            total += calcularValorTerreno(terrenos, terrenos[i]->id);
+        }
+    }
+    return total;
 }
 
 void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){//Lucas
