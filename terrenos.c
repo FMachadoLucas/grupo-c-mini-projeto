@@ -85,7 +85,15 @@ double calcularValorTerreno(Terrenos ** terrenos, int id){//Sara Raquel
 }
 
 int contarTerrenosOcupados(Terrenos ** terrenos){//Sara Raquel
+    int i;
+    int contador = 0;
 
+    for (i = 0; i < 100; i++) {
+        if (terrenos[i] != NULL) {
+            contador++;
+        }
+    }
+    return contador;
 }
 
 int contarTerrenosLivres(Terrenos ** terrenos){//Sara Raquel
