@@ -80,6 +80,12 @@ void deletarTerreno(Terrenos ** terrenos){//Lucas
     printf("(1) Digitar a id\n");
     printf("(2) Não sei a id. Mostrar todos os lotes existentes no banco de dados\n");
     scanf("%d", &opcao);
+
+    while(opcao!=1 && opcao!=2){
+        printf("[ERRO]: Opcao invalida. Digite (1) ou (2): ");
+        scanf("%d", &opcao);
+    }
+
     if(opcao==2){
         id_requerido = mTerreno_ordenado(terrenos);
     }else{
@@ -194,14 +200,14 @@ void editarTerreno(Terrenos ** terrenos, int id){//Sarah Cristina
 
 double calcularValorTerreno(Terrenos ** terrenos, int id){//Sara Raquel
     int indice = id - 1;
+    double valor;
     
-    if (indice < 0 || indice > 99) 
-        return 0;
+    if (indice < 0 || indice > 99) return 0;
     
-    if (terrenos[indice] == NULL)
-    return 0;
+    if (terrenos[indice] == NULL) return 0;
 
-    double valor = terrenos[indice]->area * terrenos[indice]->preco_m2;
+    valor = (terrenos[indice] -> area) * (terrenos[indice] -> preco_m2);
+    
     return valor;
 }
 
