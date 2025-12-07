@@ -34,11 +34,14 @@ void criarTerreno(Terrenos ** terrenos){
 
 
     //coletar os dados do usuario
-    printf("Nome do Proprietário: ");
+    printf("Nome do Proprietario: ");
     scanf("%[^\n]%*c", terrenos[i] -> dono.nome);
     
-    printf("CPF do Proprietário: ");
+    printf("CPF do Proprietario: ");
     scanf("%[^\n]%*c", terrenos[i] -> dono.cpf);
+
+    printf("Telefone do Proprietario: ");
+    scanf("%[^\n]%*c", terrenos[i] -> dono.telefone);
 
     printf("Data de Nascimento do Proprietário (dd/mm/aaaa): ");
     scanf("%d/%d/%d", &terrenos[i] -> dono.data_nasc.dia,
@@ -254,8 +257,9 @@ void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){//Lucas
             fprintf(arquivo, "%d\n", terrenos[i]->id);
 
             //strings
-            fprintf(arquivo, "%s\n", terrenos[i]->dono.nome);
-            fprintf(arquivo, "%s\n", terrenos[i]->dono.cpf);
+            fprintf(arquivo, "%s\n", terrenos[i] -> dono.nome);
+            fprintf(arquivo, "%s\n", terrenos[i] -> dono.cpf);
+            fprintf(arquivo, "%s\n", terrenos[i] -> dono.telefone);
 
             //data de nascimento
             fprintf(arquivo, "%d %d %d\n", terrenos[i]->dono.data_nasc.dia,
@@ -309,8 +313,9 @@ void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){//Lucas
         terrenos[i]->id = id_aux;
 
         //strings
-        fscanf(arquivo, "%[^\n]%*c", terrenos[i]->dono.nome);
-        fscanf(arquivo, "%[^\n]%*c", terrenos[i]->dono.cpf);
+        fscanf(arquivo, "%[^\n]%*c", terrenos[i] -> dono.nome);
+        fscanf(arquivo, "%[^\n]%*c", terrenos[i] -> dono.cpf);
+        fscanf(arquivo, "%[^\n]%*c", terrenos[i] -> dono.telefone);
 
         //data de nascimento
         fscanf(arquivo, "%d %d %d\n",  &terrenos[i]->dono.data_nasc.dia,
