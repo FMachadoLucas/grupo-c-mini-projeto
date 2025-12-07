@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "terrenos.h"
 
 int main (int argc, char * argv[]){
@@ -8,6 +9,8 @@ int main (int argc, char * argv[]){
     double valorTerreno;
     int dadosAlterados=0;//case 0
     int opcaoSalvar;//case 0
+
+    srand(time(0));
 
     //verifica os parametros da main
     if(argc < 2){
@@ -50,6 +53,10 @@ int main (int argc, char * argv[]){
         printf("Escolha uma opcao: ");
 
         scanf("%d%*c", &opcao);
+        if(opcao<0 || opcao>9){
+            printf("Entrada INVALIDA. Reinicie o programa.\n");
+            return 0;
+        }
         printf("\n");
 
         //verificar a opcao do usuario

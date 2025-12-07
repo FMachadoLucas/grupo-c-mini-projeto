@@ -1,5 +1,6 @@
 #ifndef TERRENOS_H
 #define TERRENOS_H
+#include <time.h>
 
 //definicao das structs
 
@@ -29,6 +30,14 @@ typedef struct{
  * @param terrenos Vetor de ponteiros para struct Terrenos
  */
 void inicializarVetor(Terrenos ** terrenos);
+/**
+ * @brief Busca a posicao (indice) de um terreno no vetor pelo seu id
+ * 
+ * @param terrenos vetor de ponteiros para os terrenos
+ * @param id O ID que estamos procrurando
+ * @return int Retorna o indice ou -1 se nao encontrar
+ */
+int buscarIndicePorId(Terrenos ** terrenos, int id);
 /**
  * @brief Aloca memoria, coleta dados do usuario e cria um novo terreno
  * 

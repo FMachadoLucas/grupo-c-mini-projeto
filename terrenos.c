@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "terrenos.h"
 
 void inicializarVetor(Terrenos ** terrenos){
@@ -9,28 +8,76 @@ void inicializarVetor(Terrenos ** terrenos){
     }
 }
 
-void criarTerreno(Terrenos ** terrenos){
-    int i;
-    for(i=0;i<100;i++){
-        if(terrenos[i]==NULL){
-            break;//achou uma posicao disponivel
+int buscarIndicePorId(Terrenos ** terrenos, int id){
+    for(int i=0;i<100;i++){
+        if(terrenos[i] != NULL && terrenos[i] -> id == id){
+            return i;
         }
     }
-    //se ja estiver lotado
+    return -1;//caso nao ache o id
+}
+
+void criarTerreno(Terrenos ** terrenos){
+    int i;
+    int opcaoId, novoId, idValido=0;
+
+    //procurar uma vaga livre para o terreno
+    for(i=0;i<100;i++){
+        if(terrenos[i] == NULL) break;
+    }
+
+    //verifica se ja esta lotado
     if(i==100){
         printf("\n[ERRO]: O limite de 100 terrenos foi atingido\n");
         return;
     }
 
-    //alocar memoria para a posicao atual 
+    //alocar memoria para a posicao atual
     terrenos[i] = (Terrenos *)malloc(sizeof(Terrenos));
 
+    //verifica a alocacao
+    if(terrenos[i] == NULL){
+        printf("[ERRO] Falha ao alocar memoria RAM.\n");
+    }
+
+    //definir ID
+    do{
+        printf("\nComo deseja definir o ID deste terreno?\n");
+        printf("[1] Gerar um ID Aleatorio (automatico)\n");
+        printf("[2] Digitar o ID pretendido\n");
+        printf("Escolha: ");
+        scanf("%d%*c", &opcaoId);
+
+        if(opcaoId == 1){
+            //gerar ID aleatorio, de 1000 a 9999
+            novoId = 1000 + (rand()%9000);
+            printf(">> ID Gerado Automaticamente: %d\n", novoId);
+        }else if(opcaoId == 2){
+            printf("Digite o ID Desejado (numero inteiro de 1000 a 9999): ");
+            do{
+                scanf("%d%*c", &novoId);
+            }while(novoId<1000 || novoId>9999);
+        }else{
+            printf("[ERRO] Opcao invalida.\n");
+            continue;
+        }
+
+        //verificar se o id ja existe
+        if(buscarIndicePorId(terrenos, novoId) != -1){
+            printf("[ERRO] O ID %d ja existe! Tente outro numero.\n");
+            idValido = 0;
+        }else{
+            idValido = 1;
+        }
+
+    }while(!idValido);
+
     //definicao do id
-    terrenos[i] -> id = i+1;
+    terrenos[i] -> id = novoId;
 
     //coletar os dados do usuario
 
-    printf("\n--- Novo Cadastro (ID: %d) ---\n", terrenos[i]->id);
+    printf("\n--- Preenchendo os dados do Terreno (ID: %d) ---\n", terrenos[i]->id);
     printf("Nome do Proprietario: ");
     scanf("%[^\n]%*c", terrenos[i] -> dono.nome);
     
@@ -98,13 +145,13 @@ void deletarTerreno(Terrenos ** terrenos){
         printf("Operacao cancelada.\n");
         return;
     }
+    
+    indice = buscarIndicePorId(terrenos, id_requerido);
 
-    if(id_requerido<1 || id_requerido>100){
-        printf("[ERRO]: ID invalida!\n");
+    if(indice == -1){
+        printf("[ERRO] Nao existe um terreno com a ID %d.\n", id_requerido);
         return;
     }
-    
-    indice = id_requerido - 1;
 
     //verificar se tem terreno nessa posicao
     if(terrenos[indice] == NULL){
@@ -214,12 +261,14 @@ void editarTerreno(Terrenos ** terrenos, int id){
 }
 
 double calcularValorTerreno(Terrenos ** terrenos, int id){
-    int indice = id - 1;
+    int indice = buscarIndicePorId(terrenos, id);
     double valor;
     
     if (indice < 0 || indice > 99) return 0;
     
-    if (terrenos[indice] == NULL) return 0;
+    //verificacoes
+    if(indice == -1) return 0;//nao achou
+    if(terrenos[indice] == NULL) return 0;
 
     valor = (terrenos[indice] -> area) * (terrenos[indice] -> preco_m2);
     
@@ -309,11 +358,12 @@ void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
 void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
     FILE * arquivo = fopen(nomeArquivo, "r");
 
-    //verificacao
+    //verificacao do malloc
     if(arquivo == NULL){
-        printf("[ERRO]: Arquivo '%s' nao encontrado!\n", nomeArquivo);
+        printf("[AVISO] Arquivo '%s' nao encontrado. Iniciando base vazia.\n", nomeArquivo);
         return;
     }
+
     int i=0;
     int id_aux;
 
@@ -326,8 +376,15 @@ void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
         //caso o vetor de lotes fique cheio
         if(i==100){
             printf("[AVISO]: Capacidade máxima de 100 lotes salvos atingida.\n");
+            break;
         }
         terrenos[i] = (Terrenos *)malloc(sizeof(Terrenos));
+
+        //verificacao do malloc
+        if(terrenos[i] == NULL){
+            printf("[ERRO] Falha ao alocar memoria RAM. Carregamento interrompido.\n");
+            break;
+        }
 
         //preenchimento dos dados
 
