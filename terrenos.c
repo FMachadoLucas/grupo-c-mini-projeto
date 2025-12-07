@@ -64,7 +64,7 @@ void criarTerreno(Terrenos ** terrenos){
 
         //verificar se o id ja existe
         if(buscarIndicePorId(terrenos, novoId) != -1){
-            printf("[ERRO] O ID %d ja existe! Tente outro numero.\n");
+            printf("[ERRO] O ID %d ja existe! Tente outro numero.\n", novoId);
             idValido = 0;
         }else{
             idValido = 1;
