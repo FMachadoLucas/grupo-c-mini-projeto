@@ -342,20 +342,6 @@ int mTerreno_ordenado(Terrenos **terrenos){//Lucas
 
     printf("\n Procurando terreno para apagar.\n");
 
-    // do{ 
-    //     mostrarTerreno(terrenos, id_ordem_crescente);
-    //     printf("\nDeseja apagar esse lote de id %d?\n", id_ordem_crescente);
-    //     printf("(1) SIM.\n");
-    //     printf("(2) NÃO.\n");
-    //     scanf("%d", &id_escolhida);
-    //     if(id_escolhida==1){
-    //         return id_ordem_crescente;
-    //     }else{
-    //         printf("Próximo lote...\n\n");
-    //         id_ordem_crescente++;
-    //     }
-    // }while(id_escolhida==2);
-
     for(int i=0; i<100;i++){
         if(terrenos[i]!=NULL){
             sem_terrenos = 0;//encontrou algum terrenos cadastrado
