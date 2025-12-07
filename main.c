@@ -3,6 +3,14 @@
 #include <time.h>
 #include "terrenos.h"
 
+void limparTela(){
+    #ifdef _WIN32
+        system("cls");
+    #else 
+        system("clear");
+    #endif
+}
+
 int main (int argc, char * argv[]){
     int opcao;
     int id;
@@ -32,13 +40,15 @@ int main (int argc, char * argv[]){
     carregarTerrenos(meusTerrenos, nomeArquivo);
 
     do{
+        //limpar a tela
+        limparTela();
 
         //menu
 
         printf("\n================ SISTEMA GERENCIADOR DE BAIRROS ================\n");
         if(dadosAlterados != 0) printf("[!] ATENCAO: Existem alteracoes nao salvas.\n");
         printf("----------------------------------------------------------------\n");
-        printf("\nQual ação você deseja executar?\n\n");
+        printf("\nQual acao voce deseja executar?\n\n");
         printf("[1] Criar Novo Terreno\n");
         printf("[2] Apagar Terreno\n");
         printf("[3] Mostrar Detalhes do Terreno\n");
@@ -52,8 +62,7 @@ int main (int argc, char * argv[]){
         printf("=================================================================\n");
         printf("Escolha uma opcao: ");
 
-        scanf("%d%*c", &opcao);
-        if(opcao<0 || opcao>9){
+        if(scanf("%d%*c", &opcao) != 1){
             printf("Entrada INVALIDA. Reinicie o programa.\n");
             return 0;
         }
@@ -138,9 +147,18 @@ int main (int argc, char * argv[]){
             default:
                 printf("[ERRO]: Opção Inválida! Digite outra opção.\n");
         }
+        //pausa
+        if(opcao != 0){
+            printf("\n\n------------------------------------------------");
+            printf("\n[Pressione ENTER para voltar ao menu principal]");
+        }
+
+        //consumir lixo
+        int c;
+        while((c = getchar()) != '\n' && c != EOF);
+        getchar();
+
     }while (opcao != 0);
-
-
 
     return 0;
 

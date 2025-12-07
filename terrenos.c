@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include "terrenos.h"
 
+void limparTela(){
+    #ifdef _WIN32
+        system("cls");
+    #else  
+        system("clear");
+    #endif
+}
+
 void inicializarVetor(Terrenos ** terrenos){
     for (int i=0;i<100;i++){
         terrenos[i] = NULL;
@@ -174,7 +182,7 @@ void mostrarTerreno(Terrenos ** terrenos, int id){
         if (terrenos[i] != NULL && terrenos[i]->id == id) { //se o terreno for encontrado
             encontrado = 1;
 
-            printf("--- INFORMAÇÕES DO TERRENO (ID %d) ---\n", terrenos[i]->id);
+            printf("\n--- INFORMAÇÕES DO TERRENO (ID %d) ---\n", terrenos[i]->id);
             printf("Nome do Proprietario: %s\n", terrenos[i] -> dono.nome);
             printf("CPF do Proprietario: %s\n", terrenos[i] -> dono.cpf);
             printf("Telefone do Proprietario: %s\n", terrenos[i] -> dono.telefone);
