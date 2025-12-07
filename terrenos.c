@@ -2,14 +2,6 @@
 #include <stdlib.h>
 #include "terrenos.h"
 
-void limparTela(){
-    #ifdef _WIN32
-        system("cls");
-    #else  
-        system("clear");
-    #endif
-}
-
 void inicializarVetor(Terrenos ** terrenos){
     for (int i=0;i<100;i++){
         terrenos[i] = NULL;
