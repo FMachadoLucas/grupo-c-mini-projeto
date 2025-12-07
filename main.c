@@ -67,9 +67,11 @@ int main (int argc, char * argv[]){
                 break;
             }
             case 4: {
+                mostrarTerreno(meusTerrenos, id);
                 break;   
             }
             case 5: {
+                editarTerreno(meusTerrenos, id);
                 break;
             }
             case 6: {
