@@ -352,7 +352,7 @@ void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
     }
     fclose(arquivo);
 
-    printf("\nConcluido: %d terrenos foram salvos no arquivo '%s'.\n", qtdd_terrenos_salvos, nomeArquivo);
+    printf("\nConcluido: %d terreno(s) salvo(s) no arquivo '%s'.\n", qtdd_terrenos_salvos, nomeArquivo);
 }
 
 void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){

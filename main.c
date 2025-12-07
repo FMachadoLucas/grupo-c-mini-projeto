@@ -77,7 +77,7 @@ int main (int argc, char * argv[]){
                     printf("[1] SIM. Salvar e sair.\n");
                     printf("[2] NAO. Sair sem salvar (CUIDADO: as alteracoes mais recentes serao perdidas!\n)");
                     printf("Escolha: ");
-                    scanf("%d", &opcaoSalvar);
+                    scanf("%d%*c", &opcaoSalvar);
     
                     while(opcaoSalvar != 1 && opcaoSalvar != 2){
                         printf("[ERRO]: Opcao invalida! Digite 1 para SIM ou (2) para NAO: ");
@@ -151,12 +151,8 @@ int main (int argc, char * argv[]){
         if(opcao != 0){
             printf("\n\n------------------------------------------------");
             printf("\n[Pressione ENTER para voltar ao menu principal]");
+            getchar();
         }
-
-        //consumir lixo
-        int c;
-        while((c = getchar()) != '\n' && c != EOF);
-        getchar();
 
     }while (opcao != 0);
 
