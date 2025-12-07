@@ -35,3 +35,10 @@ int contarTerrenosLivres(Terrenos ** terrenos);
 double calcularValorTotal(Terrenos ** terrenos);
 void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo);
 void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo);
+/**
+ * @brief Mostrar os terrenos em ordem crescente de ids
+ * 
+ * @param terrenos struct de terrenos
+ * @return int retorna a id que o usuário deseja
+ */
+int mTerreno_ordenado(Terrenos **terrenos);

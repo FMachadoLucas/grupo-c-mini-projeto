@@ -3,6 +3,8 @@
 #include "terrenos.h"
 
 int main (int argc, char * argv[]){
+    int opcao;
+    int id;
 
     //verifica os parametros da main
     if(argc < 2){
@@ -23,9 +25,7 @@ int main (int argc, char * argv[]){
     //verifica se ja existem dados no arquivo
     carregarTerrenos(meusTerrenos, nomeArquivo);
 
-    int opcao;
     do{
-        int id;
 
         //menu
         printf("================= MENU DO SISTEMA DE LOTEAMENTO =================\n\n");
@@ -48,7 +48,7 @@ int main (int argc, char * argv[]){
 
         //verificar a opcao do usuario
         switch (opcao){
-            case 0: {
+            case 0: {//sair do programa
                 break;
             }
             case 1: {
