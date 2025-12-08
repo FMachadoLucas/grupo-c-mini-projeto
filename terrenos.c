@@ -132,9 +132,9 @@ void criarTerreno(Terrenos ** terrenos){
     //coletar dados da compra
     printf("Digite a data de Compra do lote (dd/mm/aaaa): ");
     do {
-        scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
-                          &terrenos[i] -> data_compra.mes,
-                          &terrenos[i] -> data_compra.ano);
+        scanf("%d/%d/%d%*c", &terrenos[i] -> data_compra.dia,
+                             &terrenos[i] -> data_compra.mes,
+                             &terrenos[i] -> data_compra.ano);
         if (validarDataCompra(terrenos[i]->data_compra.dia,
                               terrenos[i]->data_compra.mes,
                               terrenos[i]->data_compra.ano) == 0) {
@@ -144,10 +144,7 @@ void criarTerreno(Terrenos ** terrenos){
                                terrenos[i]->data_compra.mes,
                                terrenos[i]->data_compra.ano) == 0);
 
-    while(getchar() != '\n');
     printf("\nO terreno com ID [%d] foi cadastrado com sucesso.", terrenos[i] -> id);
-    printf("\n[Pressione ENTER para continuar]");
-    getchar();
 }
 
 int validarCPF(char cpf[]) {
