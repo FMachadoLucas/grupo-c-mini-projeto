@@ -91,7 +91,7 @@ void criarTerreno(Terrenos ** terrenos){
     } while (validarNome(terrenos[i] -> dono.nome) == 0);
     printf("Entrada valida!\n");
     
-    printf("CPF do Proprietario (11 digitos): ");
+    printf("CPF do proprietario (11 digitos): ");
     do {
         scanf(" %[^\n]%*c", terrenos[i] -> dono.cpf);
         if (validarCPF(terrenos[i]->dono.cpf) == 0) {
@@ -100,7 +100,7 @@ void criarTerreno(Terrenos ** terrenos){
     } while (validarCPF(terrenos[i]->dono.cpf) == 0);
     printf("CPF valido!\n");
 
-    printf("Telefone do Proprietario (inclua o DDD): ");
+    printf("Telefone do proprietario (inclua o DDD): ");
     do {
         scanf(" %[^\n]%*c", terrenos[i] -> dono.telefone);
         if (validarTelefone(terrenos[i]->dono.telefone) == 0) {
@@ -109,26 +109,26 @@ void criarTerreno(Terrenos ** terrenos){
     } while (validarTelefone(terrenos[i]->dono.telefone) == 0);
     printf("Telefone valido!\n");
     
-    printf("Data de Nascimento do Proprietário (dd/mm/aaaa): ");
+    printf("Data de nascimento do proprietário (dd/mm/aaaa): ");
     
     do {
         resDataNasc = scanf("%d/%d/%d%*c", &terrenos[i] -> dono.data_nasc.dia,
                                            &terrenos[i] -> dono.data_nasc.mes,
                                            &terrenos[i] -> dono.data_nasc.ano);
         if (resDataNasc != 3) {
-            printf("Entrada inválida! Digite apenas números no formato dd/mm/aaaa.\n");
+            printf("Entrada invalida! Digite apenas números no formato dd/mm/aaaa.\n");
             while (getchar () != '\n');
             continue;
         }
         if (validarData(terrenos[i]->dono.data_nasc.dia,
                         terrenos[i]->dono.data_nasc.mes,
                         terrenos[i]->dono.data_nasc.ano) == 0) {
-            printf("Data inválida! Digite novamente no formato (dd/mm/aaa): ");
+            printf("Data invalida! Digite novamente no formato (dd/mm/aaa): ");
         }
     } while (validarData(terrenos[i]->dono.data_nasc.dia,
                          terrenos[i]->dono.data_nasc.mes,
                          terrenos[i]->dono.data_nasc.ano) == 0);
-    printf("Data de Nascimento valida!\n");
+    printf("Data de nascimento valida!\n");
 
     //coletar dados do terreno
     printf("Digite o comprimento do Terreno (m): ");
@@ -407,13 +407,18 @@ void editarTerreno(Terrenos ** terrenos, int id){
 
             printf("Nova Data de Nascimento do Proprietário (dd/mm/aaaa): ");
             do {
-                scanf("%d/%d/%d", &terrenos[i] -> dono.data_nasc.dia,
-                                  &terrenos[i] -> dono.data_nasc.mes,
-                                  &terrenos[i] -> dono.data_nasc.ano);
+                resDataNasc = scanf("%d/%d/%d%*c", &terrenos[i] -> dono.data_nasc.dia,
+                                                   &terrenos[i] -> dono.data_nasc.mes,
+                                                   &terrenos[i] -> dono.data_nasc.ano);
+                if (resDataNasc != 3) {
+                    printf("Entrada invalida! Digite apenas números no formato dd/mm/aaaa.\n");
+                    while (getchar () != '\n');
+                    continue;
+                }
                 if (validarData(terrenos[i]->dono.data_nasc.dia,
                                 terrenos[i]->dono.data_nasc.mes,
                                 terrenos[i]->dono.data_nasc.ano) == 0) {
-                    printf("Data inválida! Digite novamente: ");
+                printf("Data invalida! Digite novamente no formato (dd/mm/aaa): ");
                 }
             } while (validarData(terrenos[i]->dono.data_nasc.dia,
                                  terrenos[i]->dono.data_nasc.mes,
@@ -464,14 +469,19 @@ void editarTerreno(Terrenos ** terrenos, int id){
             //nova data da compra:
             printf("Nova Data da Compra (dd/mm/aaaa): ");
             do {
-            scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
-                              &terrenos[i] -> data_compra.mes,
-                              &terrenos[i] -> data_compra.ano);
-            while(getchar() != '\n');
-            if (validarDataCompra(terrenos[i]->data_compra.dia,
-                                  terrenos[i]->data_compra.mes,
-                                  terrenos[i]->data_compra.ano) == 0) {
-                    printf("Data inválida! Digite novamente: ");
+                resDataCompra = scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
+                                                  &terrenos[i] -> data_compra.mes,
+                                                  &terrenos[i] -> data_compra.ano);
+                while(getchar() != '\n');
+                if (resDataCompra != 3) {
+                    printf("Entrada inválida! Digite apenas números no formato dd/mm/aaaa.\n");
+                    while (getchar () != '\n');
+                    continue;
+                }
+                if (validarDataCompra(terrenos[i]->data_compra.dia,
+                                      terrenos[i]->data_compra.mes,
+                                      terrenos[i]->data_compra.ano) == 0) {
+                    printf("Data inválida! Digite novamente no formato (dd/mm/aaaa): ");
                 }
             } while (validarDataCompra(terrenos[i]->data_compra.dia,
                                        terrenos[i]->data_compra.mes,
