@@ -367,7 +367,7 @@ void mostrarTerreno(Terrenos ** terrenos, int id){
 }
 
 void editarTerreno(Terrenos ** terrenos, int id){
-    int i;
+    int i, resDataNasc, resDataCompra, resComprimento, resLargura, resValor;
     int encontrado = 0;
 
     for (i = 0; i < 100; i++) {     //verifica se a posição do terreno e sse o ID sao validos
@@ -380,9 +380,15 @@ void editarTerreno(Terrenos ** terrenos, int id){
             
             //coleta dos novos dados:
             printf("Novo Nome do Proprietário: ");
-            scanf(" %[^\n]%*c", terrenos[i]->dono.nome);
+            do {
+                scanf(" %[^\n]%*c", terrenos[i] -> dono.nome);
+                if (validarNome(terrenos[i] -> dono.nome) == 0) {
+                    printf("Entrada invalida! Digite apenas letras.\n");
+                }
+            } while (validarNome(terrenos[i] -> dono.nome) == 0);
+            printf("Entrada valida!\n");
 
-            printf("Novo CPF do Proprietário: (11 digitos)");
+            printf("Novo CPF do Proprietário: (11 digitos) ");
             do {
                 scanf(" %[^\n]%*c", terrenos[i] -> dono.cpf);
                 if (validarCPF(terrenos[i]->dono.cpf) == 0) {
@@ -390,7 +396,7 @@ void editarTerreno(Terrenos ** terrenos, int id){
                 }
             } while (validarCPF(terrenos[i]->dono.cpf) == 0);
 
-            printf("Novo Telefone do Proprietário: (inclua o DDD)");
+            printf("Novo Telefone do Proprietário: (inclua o DDD) ");
             do {
                 scanf(" %[^\n]%*c", terrenos[i] -> dono.telefone);
                 if (validarTelefone(terrenos[i]->dono.telefone) == 0) {
@@ -414,10 +420,28 @@ void editarTerreno(Terrenos ** terrenos, int id){
             
             //coleta dos novos dados dos terrenos
             printf("Novo Comprimento do Terreno (m): ");
-            scanf("%f", &terrenos[i]->comprimento);
+            do {
+                resComprimento = scanf("%f", &terrenos[i] -> comprimento);
+                if (resComprimento != 1 || terrenos[i] -> comprimento <= 0) {
+                    printf ("Entrada invalida! Digite um valor numerico acima de zero.\n");
+                    while (getchar() != '\n');
+                    continue;
+                } 
+                break;
+            } while (1);
+            printf("Entrada válida!\n");
 
             printf("Nova Largura do Terreno (m): ");
-            scanf("%f", &terrenos[i]->largura);
+            do {
+                resLargura = scanf("%f", &terrenos[i] -> largura);
+                if (resLargura != 1 || terrenos[i] -> largura <= 0) {
+                    printf ("Entrada invalida! Digite um valor numerico acima de zero.\n");
+                while (getchar() != '\n');
+                continue;
+                } 
+                break;
+            } while (1);
+            printf("Entrada válida!\n");
 
             //recalculando a area
             terrenos[i]->area = (terrenos[i] -> comprimento) * (terrenos[i] -> largura);
@@ -425,7 +449,16 @@ void editarTerreno(Terrenos ** terrenos, int id){
 
             //novo preco do m2
             printf("Novo Preço do Metro Quadrado (R$): ");
-            scanf("%f", &terrenos[i]->preco_m2);
+            do {
+                resValor = scanf("%f", &terrenos[i] -> preco_m2);
+                if (resValor != 1 || terrenos[i] -> preco_m2 <= 0) {
+                    printf ("Entrada invalida! Digite um valor numerico acima de zero.\n");
+                while (getchar() != '\n');
+                continue;
+                } 
+                break;
+            } while (1);
+            printf("Entrada válida!\n");
 
             //nova data da compra:
             printf("Nova Data da Compra (dd/mm/aaaa): ");
