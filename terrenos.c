@@ -303,9 +303,6 @@ void editarTerreno(Terrenos ** terrenos, int id){
         if (terrenos[i] != NULL && terrenos[i]->id == id) {     //se for encontrado, exibe a seguinte mensagem:
             encontrado = 1;
 
-            //limeza de buffer
-            while(getchar() != '\n');
-
             printf("\n--- EDITANDO TERRENO (ID %d) ---\n\n", id);
 
             printf("Insira os novos dados para o terreno com ID %d.\n", id);
@@ -363,8 +360,8 @@ void editarTerreno(Terrenos ** terrenos, int id){
             printf("Nova Data da Compra (dd/mm/aaaa): ");
             do {
             scanf("%d/%d/%d%*c", &terrenos[i] -> data_compra.dia,
-                              &terrenos[i] -> data_compra.mes,
-                              &terrenos[i] -> data_compra.ano);
+                                 &terrenos[i] -> data_compra.mes,
+                                 &terrenos[i] -> data_compra.ano);
             if (validarDataCompra(terrenos[i]->data_compra.dia,
                                   terrenos[i]->data_compra.mes,
                                   terrenos[i]->data_compra.ano) == 0) {
