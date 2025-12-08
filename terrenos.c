@@ -146,6 +146,8 @@ void criarTerreno(Terrenos ** terrenos){
 
     while(getchar() != '\n');
     printf("\nO terreno com ID [%d] foi cadastrado com sucesso.", terrenos[i] -> id);
+    printf("\n[Pressione ENTER para continuar]");
+    getchar();
 }
 
 int validarCPF(char cpf[]) {
@@ -224,19 +226,19 @@ void deletarTerreno(Terrenos ** terrenos){
     printf("(1) Digitar o ID manualmente\n");
     printf("(2) Procurar na lista (Nao sei o ID)\n");
     printf("Opcao: ");
-    scanf("%d", &opcao);
+    scanf("%d%*c", &opcao);
 
     //validacao
     while(opcao!=1 && opcao!=2){
         printf("[ERRO]: Opcao invalida. Digite [1] ou [2]: ");
-        scanf("%d", &opcao);
+        scanf("%d%*c", &opcao);
     }
 
     if(opcao==2){
         id_requerido = mTerreno_ordenado(terrenos);
     }else{
         printf("Digite o ID do lote que deseja apagar: ");
-        scanf("%d", &id_requerido);
+        scanf("%d%*c", &id_requerido);
     }
 
     //verificacoes de seguranca
@@ -368,7 +370,7 @@ void editarTerreno(Terrenos ** terrenos, int id){
                               &terrenos[i] -> data_compra.ano);
             if (validarDataCompra(terrenos[i]->data_compra.dia,
                                   terrenos[i]->data_compra.mes,
-                                  terrenos[i]->data_compra.mes) == 0) {
+                                  terrenos[i]->data_compra.ano) == 0) {
                     printf("Data inválida! Digite novamente: ");
                 }
             } while (validarDataCompra(terrenos[i]->data_compra.dia,
