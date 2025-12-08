@@ -50,6 +50,13 @@ void criarTerreno(Terrenos ** terrenos);
  * @param cpf String contendo o cpf a ser validado
  * @return int int Retorna 1 se o cpf for valido e 0 se nao for valido
  */
+int validarNome(char nome[]);
+/**
+ * @brief Analisa se o nome contem apenas espaços ou se contem numeros
+ * 
+ * @param nome String contendo o nome a ser validado
+ * @return int int Retorna 1 se o nome vor valido e 0 se nao for valido
+ */
 int validarCPF(char cpf[]);
 /**
  * @brief Analisa se o numero de telefone contem apenas numeros e se contem 11 digitos (com o DDD)

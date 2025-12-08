@@ -75,7 +75,7 @@ int main (int argc, char * argv[]){
                     printf("[!] ATENCAO: Existem alteracoes nao salvas.\n");
                     printf("Deseja salvar antes de sair?\n");
                     printf("[1] SIM. Salvar e sair.\n");
-                    printf("[2] NAO. Sair sem salvar (CUIDADO: as alteracoes mais recentes serao perdidas!\n)");
+                    printf("[2] NAO. Sair sem salvar (CUIDADO: as alteracoes mais recentes serao perdidas!)\n");
                     printf("Escolha: ");
                     scanf("%d%*c", &opcaoSalvar);
     

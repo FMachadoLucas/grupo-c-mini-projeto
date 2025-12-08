@@ -19,7 +19,7 @@ int buscarIndicePorId(Terrenos ** terrenos, int id){
 }
 
 void criarTerreno(Terrenos ** terrenos){
-    int i;
+    int i, resDataNasc, resDataCompra, resComprimento, resLargura, resValor;
     int opcaoId, novoId, idValido=0;
 
     //procurar uma vaga livre para o terreno
@@ -57,6 +57,9 @@ void criarTerreno(Terrenos ** terrenos){
             printf("Digite o ID Desejado (numero inteiro de 1000 a 9999): ");
             do{
                 scanf("%d%*c", &novoId);
+                if (novoId < 1000 || novoId > 9999) {
+                    printf("Id invalido! Digite novamente.\n");
+                }
             }while(novoId<1000 || novoId>9999);
         }else{
             printf("[ERRO] Opcao invalida.\n");
@@ -80,7 +83,13 @@ void criarTerreno(Terrenos ** terrenos){
 
     printf("\n--- Preenchendo os dados do Terreno (ID: %d) ---\n", terrenos[i]->id);
     printf("Nome do Proprietario: ");
+    do {
     scanf(" %[^\n]%*c", terrenos[i] -> dono.nome);
+        if (validarNome(terrenos[i] -> dono.nome) == 0) {
+            printf("Entrada invalida! Digite apenas letras.\n");
+        }
+    } while (validarNome(terrenos[i] -> dono.nome) == 0);
+    printf("Entrada valida!\n");
     
     printf("CPF do Proprietario (11 digitos): ");
     do {
@@ -101,50 +110,105 @@ void criarTerreno(Terrenos ** terrenos){
     printf("Telefone valido!\n");
     
     printf("Data de Nascimento do Proprietário (dd/mm/aaaa): ");
+    
     do {
-        scanf("%d/%d/%d%*c", &terrenos[i] -> dono.data_nasc.dia,
-                          &terrenos[i] -> dono.data_nasc.mes,
-                          &terrenos[i] -> dono.data_nasc.ano);
+        resDataNasc = scanf("%d/%d/%d%*c", &terrenos[i] -> dono.data_nasc.dia,
+                                           &terrenos[i] -> dono.data_nasc.mes,
+                                           &terrenos[i] -> dono.data_nasc.ano);
+        if (resDataNasc != 3) {
+            printf("Entrada inválida! Digite apenas números no formato dd/mm/aaaa.\n");
+            while (getchar () != '\n');
+            continue;
+        }
         if (validarData(terrenos[i]->dono.data_nasc.dia,
                         terrenos[i]->dono.data_nasc.mes,
                         terrenos[i]->dono.data_nasc.ano) == 0) {
-            printf("Data inválida! Digite novamente na forma (dd/mm/aaa): ");
+            printf("Data inválida! Digite novamente no formato (dd/mm/aaa): ");
         }
     } while (validarData(terrenos[i]->dono.data_nasc.dia,
-            terrenos[i]->dono.data_nasc.mes,
-            terrenos[i]->dono.data_nasc.ano) == 0);
+                         terrenos[i]->dono.data_nasc.mes,
+                         terrenos[i]->dono.data_nasc.ano) == 0);
     printf("Data de Nascimento valida!\n");
 
     //coletar dados do terreno
     printf("Digite o comprimento do Terreno (m): ");
-    scanf("%f", &terrenos[i] -> comprimento);
+    do {
+        resComprimento = scanf("%f", &terrenos[i] -> comprimento);
+        if (resComprimento != 1 || terrenos[i] -> comprimento <= 0) {
+            printf ("Entrada invalida! Digite um valor numerico acima de zero.\n");
+            while (getchar() != '\n');
+            continue;
+        } 
+        break;
+    } while (1);
+    printf("Entrada válida!\n");
     
     printf("Digite a largura do Terreno: ");
-    scanf("%f", &terrenos[i] -> largura);
+    do {
+        resLargura = scanf("%f", &terrenos[i] -> largura);
+        if (resLargura != 1 || terrenos[i] -> largura <= 0) {
+            printf ("Entrada invalida! Digite um valor numerico acima de zero.\n");
+            while (getchar() != '\n');
+            continue;
+        } 
+        break;
+    } while (1);
+    printf("Entrada válida!\n");
 
     //calculo da largura do terreno
     terrenos[i] -> area = (terrenos[i]->comprimento) * (terrenos[i]->largura);
 
     //coletar o valor do metro quadrado
     printf("Digite o preço do Metro Quadrado (R$): ");
-    scanf("%f", &terrenos[i] -> preco_m2);
+    do {
+        resValor = scanf("%f", &terrenos[i] -> preco_m2);
+        if (resValor != 1 || terrenos[i] -> preco_m2 <= 0) {
+            printf ("Entrada invalida! Digite um valor numerico acima de zero.\n");
+            while (getchar() != '\n');
+            continue;
+        } 
+        break;
+    } while (1);
+    printf("Entrada válida!\n");
 
     //coletar dados da compra
-    printf("Digite a data de Compra do lote (dd/mm/aaaa): ");
+    printf("Digite a data de compra do lote (dd/mm/aaaa): ");
     do {
-        scanf("%d/%d/%d%*c", &terrenos[i] -> data_compra.dia,
-                             &terrenos[i] -> data_compra.mes,
-                             &terrenos[i] -> data_compra.ano);
+        resDataCompra = scanf("%d/%d/%d%*c", &terrenos[i] -> data_compra.dia,
+                                             &terrenos[i] -> data_compra.mes,
+                                             &terrenos[i] -> data_compra.ano);
+        if (resDataCompra != 3) {
+            printf("Entrada inválida! Digite apenas números no formato dd/mm/aaaa.\n");
+            while (getchar () != '\n');
+            continue;
+        }
         if (validarDataCompra(terrenos[i]->data_compra.dia,
                               terrenos[i]->data_compra.mes,
                               terrenos[i]->data_compra.ano) == 0) {
-            printf("Data inválida! Digite novamente na forma (dd/mm/aaaa): ");
+            printf("Data inválida! Digite novamente no formato (dd/mm/aaaa): ");
         }
     } while (validarDataCompra(terrenos[i]->data_compra.dia,
                                terrenos[i]->data_compra.mes,
                                terrenos[i]->data_compra.ano) == 0);
 
     printf("\nO terreno com ID [%d] foi cadastrado com sucesso.", terrenos[i] -> id);
+}
+
+int validarNome(char nome[]) {
+    int i = 0;
+
+    while (isspace(nome[i])) {
+        i++;
+    }
+    if (nome[i] == '\0') {
+        return 0;
+    }
+    for (i = 0; nome[i] != '\0'; i++) {
+        if (isdigit(nome[i])) {
+            return 0;
+        }
+    }
+    return 1;
 }
 
 int validarCPF(char cpf[]) {
@@ -156,12 +220,15 @@ int validarCPF(char cpf[]) {
             contador++;
         }
     }
-    if (contador == 11) {
-        return 1;
-    }
-    else {
+    if (contador != 11) {
         return 0;
     }
+    for (i = 1; cpf[i] != '\0'; i++) {
+        if (cpf[i] != cpf[0]) {
+            return 1;             
+        }
+    }
+    return 0;
 }
 
 int validarTelefone(char tel[]) {
@@ -173,15 +240,19 @@ int validarTelefone(char tel[]) {
             contador++;
         }
     }
-    if (contador == 11) {
-        return 1;
-    }
-    else {
+    if (contador != 11) {
         return 0;
     }
+    for (i = 1; tel[i] != '\0'; i++) {
+        if (tel[i] != tel[0]) {
+            return 1;             
+        }
+    }
+    return 0;
 }
 
 int validarData(int dia, int mes, int ano) {
+
     if (dia < 1 || dia > 31) {
         return 0;
     }
