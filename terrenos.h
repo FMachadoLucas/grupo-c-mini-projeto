@@ -34,7 +34,7 @@ void inicializarVetor(Terrenos ** terrenos);
  * @brief Busca a posicao (indice) de um terreno no vetor pelo seu id
  * 
  * @param terrenos vetor de ponteiros para os terrenos
- * @param id O ID que estamos procrurando
+ * @param id O ID que estamos procurando
  * @return int Retorna o indice ou -1 se nao encontrar
  */
 int buscarIndicePorId(Terrenos ** terrenos, int id);
@@ -48,6 +48,42 @@ void criarTerreno(Terrenos ** terrenos);
  * @brief Busca um terreno (por ID ou lista), libera sua memoria e remova do vetor
  * 
  * @param terrenos Vetor de ponteiros para os terrenos
+ */
+int validarCPF(char cpf[]);
+/**
+ * @brief Analisa se o cpf contem apenas numeros e se contem 11 digitos
+ * 
+ * @param cpf String contendo o cpf a ser validado
+ * 
+ * @return int Retorna 1 se o cpf for valido e 0 se nao
+ */
+int validarTelefone(char tel[]);
+/**
+ * @brief Analisa se o numero de telefone contem apenas numeros e se contem 11 digitos (com o DDD)
+ * 
+ * @param tel String contendo o telefone a ser validado
+ * 
+ * @return int Retorna 1 se o telefone vor valido e 0 se nao
+ */
+int validarData(int dia, int mes, int ano);
+/**
+ * @brief Analisa se a data fornecida (dia mes e ano) eh valida
+ * 
+ * @param Dia dia da data
+ * @param Mes mes da data
+ * @param Ano ano da data
+ * 
+ * @return Retorna 1 se a data for valida e 0 se nao
+ */
+int validarDataCompra(int dia, int mes, int ano);
+/**
+ * @brief Analisa se a data fornecida de compra (dia mes e ano) eh valida
+ * 
+ * @param Dia dia da data
+ * @param Mes mes da data
+ * @param Ano ano da data
+ * 
+ * @return Retorna 1 se a data for valida e 0 nao
  */
 void deletarTerreno(Terrenos ** terrenos);
 /**
