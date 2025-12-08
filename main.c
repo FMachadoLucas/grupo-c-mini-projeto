@@ -81,7 +81,7 @@ int main (int argc, char * argv[]){
     
                     while(opcaoSalvar != 1 && opcaoSalvar != 2){
                         printf("[ERRO]: Opcao invalida! Digite 1 para SIM ou (2) para NAO: ");
-                        scanf("%d", &opcaoSalvar);
+                        scanf("%d%*c", &opcaoSalvar);
                     }
 
                     if(opcaoSalvar == 1){

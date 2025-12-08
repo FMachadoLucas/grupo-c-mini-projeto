@@ -102,7 +102,7 @@ void criarTerreno(Terrenos ** terrenos){
     
     printf("Data de Nascimento do Proprietário (dd/mm/aaaa): ");
     do {
-        scanf("%d/%d/%d", &terrenos[i] -> dono.data_nasc.dia,
+        scanf("%d/%d/%d%*c", &terrenos[i] -> dono.data_nasc.dia,
                           &terrenos[i] -> dono.data_nasc.mes,
                           &terrenos[i] -> dono.data_nasc.ano);
         if (validarData(terrenos[i]->dono.data_nasc.dia,
@@ -362,7 +362,7 @@ void editarTerreno(Terrenos ** terrenos, int id){
             //nova data da compra:
             printf("Nova Data da Compra (dd/mm/aaaa): ");
             do {
-            scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
+            scanf("%d/%d/%d%*c", &terrenos[i] -> data_compra.dia,
                               &terrenos[i] -> data_compra.mes,
                               &terrenos[i] -> data_compra.ano);
             if (validarDataCompra(terrenos[i]->data_compra.dia,
