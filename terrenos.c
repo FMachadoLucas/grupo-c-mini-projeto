@@ -68,7 +68,7 @@ void criarTerreno(Terrenos ** terrenos){
 
         //verificar se o id ja existe
         if(buscarIndicePorId(terrenos, novoId) != -1){
-            printf("[ERRO] O ID %d ja existe! Tente outro numero.\n", novoId);
+            printf("\n[ERRO] O ID %d ja existe! Tente outro numero.\n", novoId);
             idValido = 0;
         }else{
             idValido = 1;
@@ -174,9 +174,10 @@ void criarTerreno(Terrenos ** terrenos){
     //coletar dados da compra
     printf("Digite a data de compra do lote (dd/mm/aaaa): ");
     do {
-        resDataCompra = scanf("%d/%d/%d%*c", &terrenos[i] -> data_compra.dia,
-                                             &terrenos[i] -> data_compra.mes,
-                                             &terrenos[i] -> data_compra.ano);
+        resDataCompra = scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
+                                          &terrenos[i] -> data_compra.mes,
+                                          &terrenos[i] -> data_compra.ano);
+        while(getchar() != '\n');
         if (resDataCompra != 3) {
             printf("Entrada inválida! Digite apenas números no formato dd/mm/aaaa.\n");
             while (getchar () != '\n');
@@ -463,9 +464,10 @@ void editarTerreno(Terrenos ** terrenos, int id){
             //nova data da compra:
             printf("Nova Data da Compra (dd/mm/aaaa): ");
             do {
-            scanf("%d/%d/%d%*c", &terrenos[i] -> data_compra.dia,
-                                 &terrenos[i] -> data_compra.mes,
-                                 &terrenos[i] -> data_compra.ano);
+            scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
+                              &terrenos[i] -> data_compra.mes,
+                              &terrenos[i] -> data_compra.ano);
+            while(getchar() != '\n');
             if (validarDataCompra(terrenos[i]->data_compra.dia,
                                   terrenos[i]->data_compra.mes,
                                   terrenos[i]->data_compra.ano) == 0) {
@@ -473,10 +475,7 @@ void editarTerreno(Terrenos ** terrenos, int id){
                 }
             } while (validarDataCompra(terrenos[i]->data_compra.dia,
                                        terrenos[i]->data_compra.mes,
-                                       terrenos[i]->data_compra.mes) == 0);
-            
-            //limpa o buffer caso ele exista
-            while (getchar() != '\n'); 
+                                       terrenos[i]->data_compra.ano) == 0);
             
             printf("\n>> Sucesso! Terreno com ID %d atualizado.\n", id);
             break;
