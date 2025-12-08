@@ -105,20 +105,20 @@ int main (int argc, char * argv[]){
             }
             case 3: {
                 printf("Digite o ID para visualizar o terreno: ");
-                scanf("%d", &id);
+                scanf("%d%*c", &id);
                 mostrarTerreno(meusTerrenos, id);
                 break;
             }
             case 4: {
                 printf("Digite a ID para EDITAR o terreno: ");
-                scanf("%d", &id);
+                scanf("%d%*c", &id);
                 editarTerreno(meusTerrenos, id);
                 dadosAlterados = 1;
                 break;   
             }
             case 5: {
                 printf("Digite a ID para calcular o valor do terreno: ");
-                scanf("%d", &id);
+                scanf("%d%*c", &id);
                 valorTerreno = calcularValorTerreno(meusTerrenos, id);
                 if(valorTerreno > 0){
                     printf(">> Valor de Venda do Terreno %d: R$ %.2lf\n", id, valorTerreno);
