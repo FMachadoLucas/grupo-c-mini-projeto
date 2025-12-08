@@ -561,7 +561,7 @@ int mTerreno_ordenado(Terrenos **terrenos){
             printf("(2) Não, mostrar o próximo lote.\n");
             printf("(0) Cancelar operacao.\n");
             printf("Escolha: ");
-            scanf("%d", &id_escolhida);
+            scanf("%d%*c", &id_escolhida);
 
             if(id_escolhida == 1){
                 return terrenos[i]->id;
