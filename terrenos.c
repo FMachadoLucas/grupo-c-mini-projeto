@@ -86,17 +86,19 @@ void criarTerreno(Terrenos ** terrenos){
     do {
         scanf(" %[^\n]%*c", terrenos[i] -> dono.cpf);
         if (validarCPF(terrenos[i]->dono.cpf) == 0) {
-            printf("CPF invalido! Digite novamente: ");
+            printf("CPF invalido! Digite novamente (11 digitos): ");
         }
     } while (validarCPF(terrenos[i]->dono.cpf) == 0);
+    printf("CPF valido!\n");
 
     printf("Telefone do Proprietario (inclua o DDD): ");
     do {
         scanf(" %[^\n]%*c", terrenos[i] -> dono.telefone);
         if (validarTelefone(terrenos[i]->dono.telefone) == 0) {
-            printf("Telefone invalido! Digite novamente: ");
+            printf("Telefone invalido! Digite novamente (11 digitos): ");
         }
     } while (validarTelefone(terrenos[i]->dono.telefone) == 0);
+    printf("Telefone valido!\n");
     
     printf("Data de Nascimento do Proprietário (dd/mm/aaaa): ");
     do {
@@ -106,11 +108,12 @@ void criarTerreno(Terrenos ** terrenos){
         if (validarData(terrenos[i]->dono.data_nasc.dia,
                         terrenos[i]->dono.data_nasc.mes,
                         terrenos[i]->dono.data_nasc.ano) == 0) {
-            printf("Data inválida! Digite novamente: ");
+            printf("Data inválida! Digite novamente na forma (dd/mm/aaa): ");
         }
     } while (validarData(terrenos[i]->dono.data_nasc.dia,
             terrenos[i]->dono.data_nasc.mes,
             terrenos[i]->dono.data_nasc.ano) == 0);
+    printf("Data de Nascimento valida!\n");
 
     //coletar dados do terreno
     printf("Digite o comprimento do Terreno (m): ");
@@ -135,13 +138,16 @@ void criarTerreno(Terrenos ** terrenos){
         if (validarDataCompra(terrenos[i]->data_compra.dia,
                               terrenos[i]->data_compra.mes,
                               terrenos[i]->data_compra.ano) == 0) {
-            printf("Data inválida! Digite novamente: ");
+            printf("Data inválida! Digite novamente na forma (dd/mm/aaaa): ");
         }
     } while (validarDataCompra(terrenos[i]->data_compra.dia,
                                terrenos[i]->data_compra.mes,
                                terrenos[i]->data_compra.ano) == 0);
+
+    while(getchar() != '\n');
     printf("\nO terreno com ID [%d] foi cadastrado com sucesso.", terrenos[i] -> id);
 }
+
 int validarCPF(char cpf[]) {
     int i;
     int contador = 0;
