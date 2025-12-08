@@ -1,4 +1,4 @@
-Mini Projeto - Sistema Gerenciador de Bairros
+# Mini Projeto - Sistema Gerenciador de Bairros
 
 Este projeto foi desenvolvido como atividade avaliativa da disciplina de Introdução à Programação. O objetivo foi criar um sistema completo para gerenciamento de terrenos e lotes imobiliários em linguagem C, utilizando conceitos avançados como alocação dinâmica de memória, manipulação de arquivos (persistência de dados) e estruturação de dados complexos.
 
