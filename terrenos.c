@@ -4,16 +4,14 @@
 #include "terrenos.h"
 
 void inicializarVetor(Terrenos ** terrenos){
-    for (int i=0;i<100;i++){
-        terrenos[i] = NULL;
-    }
+    int i;
+    for (i = 0; i < 100; i++) terrenos[i] = NULL;
 }
 
 int buscarIndicePorId(Terrenos ** terrenos, int id){
-    for(int i=0;i<100;i++){
-        if(terrenos[i] != NULL && terrenos[i] -> id == id){
-            return i;
-        }
+    int i;
+    for (i = 0; i < 100; i++){
+        if (terrenos[i] != NULL && terrenos[i] -> id == id) return i;
     }
     return -1;//caso nao ache o id
 }
@@ -23,12 +21,12 @@ void criarTerreno(Terrenos ** terrenos){
     int opcaoId, novoId, idValido=0;
 
     //procurar uma vaga livre para o terreno
-    for(i=0;i<100;i++){
+    for (i = 0; i < 100; i++){
         if(terrenos[i] == NULL) break;
     }
 
     //verifica se ja esta lotado
-    if(i==100){
+    if (i == 100){
         printf("\n[ERRO]: O limite de 100 terrenos foi atingido\n");
         return;
     }
@@ -44,45 +42,45 @@ void criarTerreno(Terrenos ** terrenos){
     //definir ID
     do{
         printf("\nComo deseja definir o ID deste terreno?\n");
-        printf("[1] Gerar um ID Aleatorio (automatico)\n");
+        printf("[1] Gerar um ID aleatorio (automatico)\n");
         printf("[2] Digitar o ID pretendido\n");
         printf("Escolha: ");
         scanf("%d%*c", &opcaoId);
 
-        if(opcaoId == 1){
+        if (opcaoId == 1){
             //gerar ID aleatorio, de 1000 a 9999
             novoId = 1000 + (rand()%9000);
-            printf(">> ID Gerado Automaticamente: %d\n", novoId);
-        }else if(opcaoId == 2){
-            printf("Digite o ID Desejado (numero inteiro de 1000 a 9999): ");
+            printf(">> ID gerado automaticamente: %d\n", novoId);
+        } else if (opcaoId == 2){
+            printf("Digite o ID desejado (numero inteiro de 1000 a 9999): ");
             do{
                 scanf("%d%*c", &novoId);
                 if (novoId < 1000 || novoId > 9999) {
                     printf("Id invalido! Digite novamente.\n");
                 }
-            }while(novoId<1000 || novoId>9999);
-        }else{
+            } while (novoId < 1000 || novoId > 9999);
+        } else{
             printf("[ERRO] Opcao invalida.\n");
             continue;
         }
 
         //verificar se o id ja existe
-        if(buscarIndicePorId(terrenos, novoId) != -1){
+        if (buscarIndicePorId(terrenos, novoId) != -1){
             printf("\n[ERRO] O ID %d ja existe! Tente outro numero.\n", novoId);
             idValido = 0;
-        }else{
+        } else{
             idValido = 1;
         }
 
-    }while(!idValido);
+    } while (!idValido);
 
     //definicao do id
     terrenos[i] -> id = novoId;
 
     //coletar os dados do usuario
 
-    printf("\n--- Preenchendo os dados do Terreno (ID: %d) ---\n", terrenos[i]->id);
-    printf("Nome do Proprietario: ");
+    printf("\n--- Preenchendo os dados do terreno (ID: %d) ---\n", terrenos[i] -> id);
+    printf("Nome do proprietario: ");
     do {
     scanf(" %[^\n]%*c", terrenos[i] -> dono.nome);
         if (validarNome(terrenos[i] -> dono.nome) == 0) {
@@ -94,44 +92,44 @@ void criarTerreno(Terrenos ** terrenos){
     printf("CPF do proprietario (11 digitos): ");
     do {
         scanf(" %[^\n]%*c", terrenos[i] -> dono.cpf);
-        if (validarCPF(terrenos[i]->dono.cpf) == 0) {
+        if (validarCPF(terrenos[i] -> dono.cpf) == 0) {
             printf("CPF invalido! Digite novamente (11 digitos): ");
         }
-    } while (validarCPF(terrenos[i]->dono.cpf) == 0);
+    } while (validarCPF(terrenos[i] -> dono.cpf) == 0);
     printf("CPF valido!\n");
 
     printf("Telefone do proprietario (inclua o DDD): ");
     do {
         scanf(" %[^\n]%*c", terrenos[i] -> dono.telefone);
-        if (validarTelefone(terrenos[i]->dono.telefone) == 0) {
+        if (validarTelefone(terrenos[i] -> dono.telefone) == 0) {
             printf("Telefone invalido! Digite novamente (11 digitos): ");
         }
-    } while (validarTelefone(terrenos[i]->dono.telefone) == 0);
+    } while (validarTelefone(terrenos[i] -> dono.telefone) == 0);
     printf("Telefone valido!\n");
     
-    printf("Data de nascimento do proprietário (dd/mm/aaaa): ");
+    printf("Data de nascimento do proprietario (dd/mm/aaaa): ");
     
     do {
         resDataNasc = scanf("%d/%d/%d%*c", &terrenos[i] -> dono.data_nasc.dia,
                                            &terrenos[i] -> dono.data_nasc.mes,
                                            &terrenos[i] -> dono.data_nasc.ano);
         if (resDataNasc != 3) {
-            printf("Entrada invalida! Digite apenas números no formato dd/mm/aaaa.\n");
+            printf("Entrada invalida! Digite apenas numeros no formato dd/mm/aaaa.\n");
             while (getchar () != '\n');
             continue;
         }
-        if (validarData(terrenos[i]->dono.data_nasc.dia,
-                        terrenos[i]->dono.data_nasc.mes,
-                        terrenos[i]->dono.data_nasc.ano) == 0) {
+        if (validarData(terrenos[i] -> dono.data_nasc.dia,
+                        terrenos[i] -> dono.data_nasc.mes,
+                        terrenos[i] -> dono.data_nasc.ano) == 0) {
             printf("Data invalida! Digite novamente no formato (dd/mm/aaa): ");
         }
-    } while (validarData(terrenos[i]->dono.data_nasc.dia,
-                         terrenos[i]->dono.data_nasc.mes,
-                         terrenos[i]->dono.data_nasc.ano) == 0);
+    } while (validarData(terrenos[i] -> dono.data_nasc.dia,
+                         terrenos[i] -> dono.data_nasc.mes,
+                         terrenos[i] -> dono.data_nasc.ano) == 0);
     printf("Data de nascimento valida!\n");
 
     //coletar dados do terreno
-    printf("Digite o comprimento do Terreno (m): ");
+    printf("Digite o comprimento do terreno (m): ");
     do {
         resComprimento = scanf("%f", &terrenos[i] -> comprimento);
         if (resComprimento != 1 || terrenos[i] -> comprimento <= 0) {
@@ -141,9 +139,9 @@ void criarTerreno(Terrenos ** terrenos){
         } 
         break;
     } while (1);
-    printf("Entrada válida!\n");
+    printf("Entrada valida!\n");
     
-    printf("Digite a largura do Terreno: ");
+    printf("Digite a largura do terreno: ");
     do {
         resLargura = scanf("%f", &terrenos[i] -> largura);
         if (resLargura != 1 || terrenos[i] -> largura <= 0) {
@@ -153,13 +151,13 @@ void criarTerreno(Terrenos ** terrenos){
         } 
         break;
     } while (1);
-    printf("Entrada válida!\n");
+    printf("Entrada valida!\n");
 
     //calculo da largura do terreno
-    terrenos[i] -> area = (terrenos[i]->comprimento) * (terrenos[i]->largura);
+    terrenos[i] -> area = (terrenos[i] -> comprimento) * (terrenos[i] -> largura);
 
     //coletar o valor do metro quadrado
-    printf("Digite o preço do Metro Quadrado (R$): ");
+    printf("Digite o preco do Metro Quadrado (R$): ");
     do {
         resValor = scanf("%f", &terrenos[i] -> preco_m2);
         if (resValor != 1 || terrenos[i] -> preco_m2 <= 0) {
@@ -169,7 +167,7 @@ void criarTerreno(Terrenos ** terrenos){
         } 
         break;
     } while (1);
-    printf("Entrada válida!\n");
+    printf("Entrada valida!\n");
 
     //coletar dados da compra
     printf("Digite a data de compra do lote (dd/mm/aaaa): ");
@@ -177,20 +175,20 @@ void criarTerreno(Terrenos ** terrenos){
         resDataCompra = scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
                                           &terrenos[i] -> data_compra.mes,
                                           &terrenos[i] -> data_compra.ano);
-        while(getchar() != '\n');
+        while (getchar() != '\n');
         if (resDataCompra != 3) {
-            printf("Entrada inválida! Digite apenas números no formato dd/mm/aaaa.\n");
+            printf("Entrada invalida! Digite apenas numeros no formato dd/mm/aaaa.\n");
             while (getchar () != '\n');
             continue;
         }
-        if (validarDataCompra(terrenos[i]->data_compra.dia,
-                              terrenos[i]->data_compra.mes,
-                              terrenos[i]->data_compra.ano) == 0) {
-            printf("Data inválida! Digite novamente no formato (dd/mm/aaaa): ");
+        if (validarDataCompra(terrenos[i] -> data_compra.dia,
+                              terrenos[i] -> data_compra.mes,
+                              terrenos[i] -> data_compra.ano) == 0) {
+            printf("Data invalida! Digite novamente no formato (dd/mm/aaaa): ");
         }
-    } while (validarDataCompra(terrenos[i]->data_compra.dia,
-                               terrenos[i]->data_compra.mes,
-                               terrenos[i]->data_compra.ano) == 0);
+    } while (validarDataCompra(terrenos[i] -> data_compra.dia,
+                               terrenos[i] -> data_compra.mes,
+                               terrenos[i] -> data_compra.ano) == 0);
 
     printf("\nO terreno com ID [%d] foi cadastrado com sucesso.", terrenos[i] -> id);
 }
@@ -198,16 +196,12 @@ void criarTerreno(Terrenos ** terrenos){
 int validarNome(char nome[]) {
     int i = 0;
 
-    while (isspace(nome[i])) {
-        i++;
-    }
-    if (nome[i] == '\0') {
-        return 0;
-    }
+    while (isspace(nome[i])) i++;
+
+    if (nome[i] == '\0') return 0;
+
     for (i = 0; nome[i] != '\0'; i++) {
-        if (isdigit(nome[i])) {
-            return 0;
-        }
+        if (isdigit(nome[i])) return 0;
     }
     return 1;
 }
@@ -217,17 +211,12 @@ int validarCPF(char cpf[]) {
     int contador = 0;
 
     for (i = 0; cpf[i] != '\0'; i++) {
-        if (isdigit(cpf[i])) {
-            contador++;
-        }
+        if (isdigit(cpf[i])) contador++;
     }
-    if (contador != 11) {
-        return 0;
-    }
+    if (contador != 11) return 0;
+
     for (i = 1; cpf[i] != '\0'; i++) {
-        if (cpf[i] != cpf[0]) {
-            return 1;             
-        }
+        if (cpf[i] != cpf[0]) return 1;             
     }
     return 0;
 }
@@ -237,51 +226,30 @@ int validarTelefone(char tel[]) {
     int contador = 0;
 
     for (i = 0; tel[i] != '\0'; i++) {
-        if (isdigit(tel[i])) {
-            contador++;
-        }
+        if (isdigit(tel[i])) contador++;
     }
-    if (contador != 11) {
-        return 0;
-    }
+    if (contador != 11) return 0;
+
     for (i = 1; tel[i] != '\0'; i++) {
-        if (tel[i] != tel[0]) {
-            return 1;             
-        }
+        if (tel[i] != tel[0]) return 1;             
     }
     return 0;
 }
 
 int validarData(int dia, int mes, int ano) {
 
-    if (dia < 1 || dia > 31) {
-        return 0;
-    }
-    if (mes < 1 || mes > 12) {
-        return 0;
-    }
-    if (ano < 1920 || ano > 2024) {
-        return 0;
-    }
-    if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
-        return 0;
-    }
+    if (dia < 1 || dia > 31) return 0;
+    if (mes < 1 || mes > 12) return 0;
+    if (ano < 1920 || ano > 2024) return 0;
+    if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) return 0;
     return 1;
 }
 
 int validarDataCompra(int dia, int mes, int ano) {
-    if (dia < 1 || dia > 31) {
-        return 0;
-    }
-    if (mes < 1 || mes > 12) {
-        return 0;
-    }
-    if (ano < 1920 || ano > 2025) {
-        return 0;
-    }
-    if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
-        return 0;
-    }
+    if (dia < 1 || dia > 31) return 0;
+    if (mes < 1 || mes > 12) return 0;
+    if (ano < 1920 || ano > 2025) return 0;
+    if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) return 0;
     return 1;
 }
 
@@ -298,33 +266,33 @@ void deletarTerreno(Terrenos ** terrenos){
     scanf("%d%*c", &opcao);
 
     //validacao
-    while(opcao!=1 && opcao!=2){
+    while (opcao != 1 && opcao != 2){
         printf("[ERRO]: Opcao invalida. Digite [1] ou [2]: ");
         scanf("%d%*c", &opcao);
     }
 
-    if(opcao==2){
+    if (opcao == 2){
         id_requerido = mTerreno_ordenado(terrenos);
-    }else{
+    } else{
         printf("Digite o ID do lote que deseja apagar: ");
         scanf("%d%*c", &id_requerido);
     }
 
     //verificacoes de seguranca
-    if(id_requerido == -1){//o usuario desistiu
+    if (id_requerido == -1){//o usuario desistiu
         printf("Operacao cancelada.\n");
         return;
     }
     
     indice = buscarIndicePorId(terrenos, id_requerido);
 
-    if(indice == -1){
+    if (indice == -1){
         printf("[ERRO] Nao existe um terreno com a ID %d.\n", id_requerido);
         return;
     }
 
     //verificar se tem terreno nessa posicao
-    if(terrenos[indice] == NULL){
+    if (terrenos[indice] == NULL){
         printf("[ERRO]: Nao existe um terreno com a ID %d.\n", id_requerido);
         return;
     }
@@ -341,29 +309,29 @@ void mostrarTerreno(Terrenos ** terrenos, int id){
     int encontrado = 0; //verifica se o terreno foi localizado
 
     for (i = 0; i < 100; i++) {
-        if (terrenos[i] != NULL && terrenos[i]->id == id) { //se o terreno for encontrado
+        if (terrenos[i] != NULL && terrenos[i] -> id == id) { //se o terreno for encontrado
             encontrado = 1;
 
-            printf("\n--- INFORMAÇÕES DO TERRENO (ID %d) ---\n", terrenos[i]->id);
-            printf("Nome do Proprietario: %s\n", terrenos[i] -> dono.nome);
-            printf("CPF do Proprietario: %s\n", terrenos[i] -> dono.cpf);
-            printf("Telefone do Proprietario: %s\n", terrenos[i] -> dono.telefone);
-            printf("Data de Nascimento: %02d/%02d/%d\n", terrenos[i]->dono.data_nasc.dia,
-                                                         terrenos[i]->dono.data_nasc.mes,
-                                                         terrenos[i]->dono.data_nasc.ano);
+            printf("\n--- INFORMACOES DO TERRENO (ID %d) ---\n", terrenos[i] -> id);
+            printf("Nome do proprietario: %s\n", terrenos[i] -> dono.nome);
+            printf("CPF do proprietario: %s\n", terrenos[i] -> dono.cpf);
+            printf("Telefone do proprietario: %s\n", terrenos[i] -> dono.telefone);
+            printf("Data de nascimento: %02d/%02d/%d\n", terrenos[i] -> dono.data_nasc.dia,
+                                                         terrenos[i] -> dono.data_nasc.mes,
+                                                         terrenos[i] -> dono.data_nasc.ano);
             printf(" --------------------------------\n");                                         
-            printf("Comprimento do Terreno (m): %.2f\n", terrenos[i]->comprimento);
-            printf("Largura do Terreno (m): %.2f\n", terrenos[i]->largura);
-            printf("Área Total (m2): %.2f\n", terrenos[i]->area);
-            printf("Preço do Metro Quadrado (R$): %.2f\n", terrenos[i]->preco_m2);
-            printf("Data da Compra: %02d/%02d/%d\n", terrenos[i]->data_compra.dia,
-                                                     terrenos[i]->data_compra.mes,
-                                                     terrenos[i]->data_compra.ano);
+            printf("Comprimento do terreno (m): %.2f\n", terrenos[i] -> comprimento);
+            printf("Largura do terreno (m): %.2f\n", terrenos[i] -> largura);
+            printf("Area total (m2): %.2f\n", terrenos[i] -> area);
+            printf("Preco do metro 1uadrado (R$): %.2f\n", terrenos[i] -> preco_m2);
+            printf("Data da compra: %02d/%02d/%d\n", terrenos[i] -> data_compra.dia,
+                                                     terrenos[i] -> data_compra.mes,
+                                                     terrenos[i] -> data_compra.ano);
             break;
         }
     }
     if (!encontrado) { //terreno nao encontrado
-        printf("\n[ERRO]: Terreno com ID %d não encontrado.\n", id);
+        printf("\n[ERRO]: Terreno com ID %d nao encontrado.\n", id);
     }
 }
 
@@ -372,7 +340,7 @@ void editarTerreno(Terrenos ** terrenos, int id){
     int encontrado = 0;
 
     for (i = 0; i < 100; i++) {     //verifica se a posição do terreno e sse o ID sao validos
-        if (terrenos[i] != NULL && terrenos[i]->id == id) {     //se for encontrado, exibe a seguinte mensagem:
+        if (terrenos[i] != NULL && terrenos[i] -> id == id) {     //se for encontrado, exibe a seguinte mensagem:
             encontrado = 1;
 
             printf("\n--- EDITANDO TERRENO (ID %d) ---\n\n", id);
@@ -380,7 +348,7 @@ void editarTerreno(Terrenos ** terrenos, int id){
             printf("Insira os novos dados para o terreno com ID %d.\n", id);
             
             //coleta dos novos dados:
-            printf("Novo Nome do Proprietário: ");
+            printf("Novo nome do proprietario: ");
             do {
                 scanf(" %[^\n]%*c", terrenos[i] -> dono.nome);
                 if (validarNome(terrenos[i] -> dono.nome) == 0) {
@@ -389,43 +357,43 @@ void editarTerreno(Terrenos ** terrenos, int id){
             } while (validarNome(terrenos[i] -> dono.nome) == 0);
             printf("Entrada valida!\n");
 
-            printf("Novo CPF do Proprietário: (11 digitos) ");
+            printf("Novo CPF do proprietario: (11 digitos) ");
             do {
                 scanf(" %[^\n]%*c", terrenos[i] -> dono.cpf);
-                if (validarCPF(terrenos[i]->dono.cpf) == 0) {
+                if (validarCPF(terrenos[i] -> dono.cpf) == 0) {
                     printf("CPF invalido! Digite novamente: ");
                 }
-            } while (validarCPF(terrenos[i]->dono.cpf) == 0);
+            } while (validarCPF(terrenos[i] -> dono.cpf) == 0);
 
-            printf("Novo Telefone do Proprietário: (inclua o DDD) ");
+            printf("Novo telefone do proprietqrio: (inclua o DDD) ");
             do {
                 scanf(" %[^\n]%*c", terrenos[i] -> dono.telefone);
-                if (validarTelefone(terrenos[i]->dono.telefone) == 0) {
+                if (validarTelefone(terrenos[i] -> dono.telefone) == 0) {
                     printf("Telefone invalido! Digite novamente: ");
                 }
-            } while (validarTelefone(terrenos[i]->dono.telefone) == 0);
+            } while (validarTelefone(terrenos[i] -> dono.telefone) == 0);
 
-            printf("Nova Data de Nascimento do Proprietário (dd/mm/aaaa): ");
+            printf("Nova data de nascimento do proprietario (dd/mm/aaaa): ");
             do {
                 resDataNasc = scanf("%d/%d/%d%*c", &terrenos[i] -> dono.data_nasc.dia,
                                                    &terrenos[i] -> dono.data_nasc.mes,
                                                    &terrenos[i] -> dono.data_nasc.ano);
                 if (resDataNasc != 3) {
-                    printf("Entrada invalida! Digite apenas números no formato dd/mm/aaaa.\n");
+                    printf("Entrada invalida! Digite apenas numeros no formato dd/mm/aaaa.\n");
                     while (getchar () != '\n');
                     continue;
                 }
-                if (validarData(terrenos[i]->dono.data_nasc.dia,
-                                terrenos[i]->dono.data_nasc.mes,
-                                terrenos[i]->dono.data_nasc.ano) == 0) {
+                if (validarData(terrenos[i] -> dono.data_nasc.dia,
+                                terrenos[i] -> dono.data_nasc.mes,
+                                terrenos[i] -> dono.data_nasc.ano) == 0) {
                 printf("Data invalida! Digite novamente no formato (dd/mm/aaa): ");
                 }
-            } while (validarData(terrenos[i]->dono.data_nasc.dia,
-                                 terrenos[i]->dono.data_nasc.mes,
-                                 terrenos[i]->dono.data_nasc.ano) == 0);
+            } while (validarData(terrenos[i] -> dono.data_nasc.dia,
+                                 terrenos[i] -> dono.data_nasc.mes,
+                                 terrenos[i] -> dono.data_nasc.ano) == 0);
             
             //coleta dos novos dados dos terrenos
-            printf("Novo Comprimento do Terreno (m): ");
+            printf("Novo comprimento do terreno (m): ");
             do {
                 resComprimento = scanf("%f", &terrenos[i] -> comprimento);
                 if (resComprimento != 1 || terrenos[i] -> comprimento <= 0) {
@@ -435,9 +403,9 @@ void editarTerreno(Terrenos ** terrenos, int id){
                 } 
                 break;
             } while (1);
-            printf("Entrada válida!\n");
+            printf("Entrada valida!\n");
 
-            printf("Nova Largura do Terreno (m): ");
+            printf("Nova largura do terreno (m): ");
             do {
                 resLargura = scanf("%f", &terrenos[i] -> largura);
                 if (resLargura != 1 || terrenos[i] -> largura <= 0) {
@@ -447,14 +415,14 @@ void editarTerreno(Terrenos ** terrenos, int id){
                 } 
                 break;
             } while (1);
-            printf("Entrada válida!\n");
+            printf("Entrada valida!\n");
 
             //recalculando a area
-            terrenos[i]->area = (terrenos[i] -> comprimento) * (terrenos[i] -> largura);
-            printf("Área Total Recalculada (m²): %.2f\n", terrenos[i]->area); 
+            terrenos[i] -> area = (terrenos[i] -> comprimento) * (terrenos[i] -> largura);
+            printf("Area total recalculada (m²): %.2f\n", terrenos[i] -> area); 
 
             //novo preco do m2
-            printf("Novo Preço do Metro Quadrado (R$): ");
+            printf("Novo preco do metro quadrado (R$): ");
             do {
                 resValor = scanf("%f", &terrenos[i] -> preco_m2);
                 if (resValor != 1 || terrenos[i] -> preco_m2 <= 0) {
@@ -464,35 +432,35 @@ void editarTerreno(Terrenos ** terrenos, int id){
                 } 
                 break;
             } while (1);
-            printf("Entrada válida!\n");
+            printf("Entrada valida!\n");
 
             //nova data da compra:
-            printf("Nova Data da Compra (dd/mm/aaaa): ");
+            printf("Nova data da compra (dd/mm/aaaa): ");
             do {
                 resDataCompra = scanf("%d/%d/%d", &terrenos[i] -> data_compra.dia,
                                                   &terrenos[i] -> data_compra.mes,
                                                   &terrenos[i] -> data_compra.ano);
                 while(getchar() != '\n');
                 if (resDataCompra != 3) {
-                    printf("Entrada inválida! Digite apenas números no formato dd/mm/aaaa.\n");
+                    printf("Entrada invalida! Digite apenas numeros no formato dd/mm/aaaa.\n");
                     while (getchar () != '\n');
                     continue;
                 }
-                if (validarDataCompra(terrenos[i]->data_compra.dia,
-                                      terrenos[i]->data_compra.mes,
-                                      terrenos[i]->data_compra.ano) == 0) {
-                    printf("Data inválida! Digite novamente no formato (dd/mm/aaaa): ");
+                if (validarDataCompra(terrenos[i] -> data_compra.dia,
+                                      terrenos[i] -> data_compra.mes,
+                                      terrenos[i] -> data_compra.ano) == 0) {
+                    printf("Data invalida! Digite novamente no formato (dd/mm/aaaa): ");
                 }
-            } while (validarDataCompra(terrenos[i]->data_compra.dia,
-                                       terrenos[i]->data_compra.mes,
-                                       terrenos[i]->data_compra.ano) == 0);
+            } while (validarDataCompra(terrenos[i] -> data_compra.dia,
+                                       terrenos[i] -> data_compra.mes,
+                                       terrenos[i] -> data_compra.ano) == 0);
             
             printf("\n>> Sucesso! Terreno com ID %d atualizado.\n", id);
             break;
         }
     }
     if (!encontrado) {//se o terreno nao foi encontrado
-        printf("\nERRO: Terreno com ID %d não encontrado ou posição vazia.\n", id);
+        printf("\nERRO: Terreno com ID %d nao encontrado ou posicao vazia.\n", id);
     }
 }
 
@@ -503,8 +471,8 @@ double calcularValorTerreno(Terrenos ** terrenos, int id){
     if (indice < 0 || indice > 99) return 0;
     
     //verificacoes
-    if(indice == -1) return 0;//nao achou
-    if(terrenos[indice] == NULL) return 0;
+    if (indice == -1) return 0;//nao achou
+    if (terrenos[indice] == NULL) return 0;
 
     valor = (terrenos[indice] -> area) * (terrenos[indice] -> preco_m2);
     
@@ -516,9 +484,7 @@ int contarTerrenosOcupados(Terrenos ** terrenos){
     int contador = 0;
 
     for (i = 0; i < 100; i++) {
-        if (terrenos[i] != NULL) {
-            contador++;
-        }
+        if (terrenos[i] != NULL) contador++;
     }
     return contador;
 }
@@ -528,9 +494,7 @@ int contarTerrenosLivres(Terrenos ** terrenos){
     int contador = 0;
 
     for (i = 0; i < 100; i++) {
-        if (terrenos[i] == NULL) {
-            contador++;
-        }
+        if (terrenos[i] == NULL) contador++;
     }
     return contador;
 }
@@ -541,7 +505,7 @@ double calcularValorTotal(Terrenos ** terrenos){
 
     for (i = 0; i < 100; i++) {
         if (terrenos[i] != NULL) {
-            total += calcularValorTerreno(terrenos, terrenos[i]->id);
+            total += calcularValorTerreno(terrenos, terrenos[i] -> id);
         }
     }
     return total;
@@ -549,18 +513,18 @@ double calcularValorTotal(Terrenos ** terrenos){
 
 void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
     FILE * arquivo = fopen(nomeArquivo, "w");
-    int qtdd_terrenos_salvos=0;
-
+    int qtdd_terrenos_salvos = 0;
+    int i;
     //verificacao se der erro
-    if(arquivo == NULL){
-        printf("[ERRO]: Não foi possível criar ou abrir o arquivo '%s'.\n", nomeArquivo);
+    if (arquivo == NULL){
+        printf("[ERRO]: Nao foi possivel criar ou abrir o arquivo '%s'.\n", nomeArquivo);
         return;
     }
 
-    for(int i=0;i<100;i++){
-        if(terrenos[i]!=NULL){
+    for (i = 0; i < 100; i++){
+        if (terrenos[i] != NULL){
             //ID
-            fprintf(arquivo, "%d\n", terrenos[i]->id);
+            fprintf(arquivo, "%d\n", terrenos[i] -> id);
 
             //strings
             fprintf(arquivo, "%s\n", terrenos[i] -> dono.nome);
@@ -568,20 +532,20 @@ void salvarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
             fprintf(arquivo, "%s\n", terrenos[i] -> dono.telefone);
 
             //data de nascimento
-            fprintf(arquivo, "%02d %02d %02d\n", terrenos[i]->dono.data_nasc.dia,
-                                                 terrenos[i]->dono.data_nasc.mes,
-                                                 terrenos[i]->dono.data_nasc.ano);
+            fprintf(arquivo, "%02d %02d %02d\n", terrenos[i] -> dono.data_nasc.dia,
+                                                 terrenos[i] -> dono.data_nasc.mes,
+                                                 terrenos[i] -> dono.data_nasc.ano);
 
             //dimensoes e preco
-            fprintf(arquivo, "%f\n", terrenos[i]->comprimento);
-            fprintf(arquivo, "%f\n", terrenos[i]->largura);
-            fprintf(arquivo, "%f\n", terrenos[i]->area);
-            fprintf(arquivo, "%f\n", terrenos[i]->preco_m2);
+            fprintf(arquivo, "%f\n", terrenos[i] -> comprimento);
+            fprintf(arquivo, "%f\n", terrenos[i] -> largura);
+            fprintf(arquivo, "%f\n", terrenos[i] -> area);
+            fprintf(arquivo, "%f\n", terrenos[i] -> preco_m2);
 
             //data de compra
-            fprintf(arquivo, "%02d %02d %02d\n", terrenos[i]->data_compra.dia,
-                                                 terrenos[i]->data_compra.mes,
-                                                 terrenos[i]->data_compra.ano);
+            fprintf(arquivo, "%02d %02d %02d\n", terrenos[i] -> data_compra.dia,
+                                                 terrenos[i] -> data_compra.mes,
+                                                 terrenos[i] -> data_compra.ano);
 
             qtdd_terrenos_salvos++;
         }
@@ -595,36 +559,34 @@ void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
     FILE * arquivo = fopen(nomeArquivo, "r");
 
     //verificacao do malloc
-    if(arquivo == NULL){
+    if (arquivo == NULL){
         printf("[AVISO] Arquivo '%s' nao encontrado. Iniciando base vazia.\n", nomeArquivo);
         return;
     }
 
-    int i=0;
+    int i = 0;
     int id_aux;
 
     //verificar se tem terreno naquela posicao
-    while(fscanf(arquivo, "%d\n", &id_aux) == 1){
-        //procira proximo lote vazio
-        while(i<100 && terrenos[i]!=NULL){
-            i++;
-        }
+    while (fscanf(arquivo, "%d\n", &id_aux) == 1){
+        //procura proximo lote vazio
+        while (i < 100 && terrenos[i] != NULL) i++;
         //caso o vetor de lotes fique cheio
-        if(i==100){
-            printf("[AVISO]: Capacidade máxima de 100 lotes salvos atingida.\n");
+        if (i == 100){
+            printf("[AVISO]: Capacidade maxima de 100 lotes salvos atingida.\n");
             break;
         }
         terrenos[i] = (Terrenos *)malloc(sizeof(Terrenos));
 
         //verificacao do malloc
-        if(terrenos[i] == NULL){
+        if (terrenos[i] == NULL){
             printf("[ERRO] Falha ao alocar memoria RAM. Carregamento interrompido.\n");
             break;
         }
 
         //preenchimento dos dados
 
-        terrenos[i]->id = id_aux;
+        terrenos[i] -> id = id_aux;
 
         //strings
         fscanf(arquivo, "%[^\n]%*c", terrenos[i] -> dono.nome);
@@ -632,20 +594,20 @@ void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
         fscanf(arquivo, "%[^\n]%*c", terrenos[i] -> dono.telefone);
 
         //data de nascimento
-        fscanf(arquivo, "%d %d %d\n",  &terrenos[i]->dono.data_nasc.dia,
-                                       &terrenos[i]->dono.data_nasc.mes,
-                                       &terrenos[i]->dono.data_nasc.ano);
+        fscanf(arquivo, "%d %d %d\n",  &terrenos[i] -> dono.data_nasc.dia,
+                                       &terrenos[i] -> dono.data_nasc.mes,
+                                       &terrenos[i] -> dono.data_nasc.ano);
 
         //medidas e precos
-        fscanf(arquivo, "%f\n", &terrenos[i]->comprimento);
-        fscanf(arquivo, "%f\n", &terrenos[i]->largura);
-        fscanf(arquivo, "%f\n", &terrenos[i]->area);
-        fscanf(arquivo, "%f\n", &terrenos[i]->preco_m2);
+        fscanf(arquivo, "%f\n", &terrenos[i] -> comprimento);
+        fscanf(arquivo, "%f\n", &terrenos[i] -> largura);
+        fscanf(arquivo, "%f\n", &terrenos[i] -> area);
+        fscanf(arquivo, "%f\n", &terrenos[i] -> preco_m2);
 
         //data da compra
-        fscanf(arquivo, "%d %d %d\n", &terrenos[i]->data_compra.dia,
-                                      &terrenos[i]->data_compra.mes,
-                                      &terrenos[i]->data_compra.ano);
+        fscanf(arquivo, "%d %d %d\n", &terrenos[i] -> data_compra.dia,
+                                      &terrenos[i] -> data_compra.mes,
+                                      &terrenos[i] -> data_compra.ano);
 
         i++;
     }
@@ -655,35 +617,35 @@ void carregarTerrenos(Terrenos ** terrenos, const char *nomeArquivo){
 }
 
 int mTerreno_ordenado(Terrenos **terrenos){
-    int id_escolhida=0;//verifica se ja escolheu a id
+    int id_escolhida = 0;//verifica se ja escolheu a id
     int sem_terrenos = 1;//verifica se tem terrenos cadastrados
-
+    int i;
     printf("\n--- PROCURANDO TERRENO PARA APAGAR ---\n");
 
-    for(int i=0; i<100;i++){
-        if(terrenos[i]!=NULL){
+    for (i = 0; i < 100; i++){
+        if (terrenos[i] != NULL){
             sem_terrenos = 0;//encontrou algum terrenos cadastrado
 
-            mostrarTerreno(terrenos, terrenos[i]->id);
+            mostrarTerreno(terrenos, terrenos[i] -> id);
 
-            printf("\nDeseja apagar esse lote (ID: %d)?\n", terrenos[i]->id);
+            printf("\nDeseja apagar esse lote (ID: %d)?\n", terrenos[i] -> id);
             printf("(1) Sim, apagar este lote.\n");
-            printf("(2) Não, mostrar o próximo lote.\n");
+            printf("(2) Nao, mostrar o proximo lote.\n");
             printf("(0) Cancelar operacao.\n");
             printf("Escolha: ");
             scanf("%d%*c", &id_escolhida);
 
-            if(id_escolhida == 1){
-                return terrenos[i]->id;
-            }else if(id_escolhida == 0){
+            if (id_escolhida == 1){
+                return terrenos[i] -> id;
+            } else if(id_escolhida == 0){
                 return -1;
             }//se for 2, continua o loop
         }
     }
 
-    if(sem_terrenos == 1){
+    if (sem_terrenos == 1){
         printf("[AVISO] Nenhum terreno encontrado na lista para apagar.\n");
-    }else{
+    } else{
         printf("\n[FIM DA LISTA] Nenhum terreno foi selecionado.\n");
     }
     //percorreu todos os terrenos e não escolheu nenhum
