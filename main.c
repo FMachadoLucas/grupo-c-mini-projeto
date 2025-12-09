@@ -63,8 +63,11 @@ int main (int argc, char * argv[]){
         printf("Escolha uma opcao: ");
 
         if(scanf("%d%*c", &opcao) != 1){
-            printf("Entrada INVALIDA. Reinicie o programa.\n");
-            return 0;
+            printf("Entrada INVALIDA. Digite apenas numeros.\n");
+            while(getchar()!='\n');//limpar buffer
+            printf("\n[Pressione ENTER para tentar novamente]");
+            getchar();
+            continue;
         }
         printf("\n");
 
