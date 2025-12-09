@@ -141,7 +141,7 @@ int main (int argc, char * argv[]){
             }
             case 9: {
                 salvarTerrenos(meusTerrenos, nomeArquivo);
-                dadosAlterados = 1;
+                dadosAlterados = 0;
                 break;
             }
             default:
