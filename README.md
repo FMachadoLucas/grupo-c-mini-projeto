@@ -6,6 +6,11 @@ O desenvolvimento seguiu as instruções de manipular um vetor de ponteiros para
 
 🎥 Vídeo de apresentação:
 
+## 🔗 Link do Repositório
+
+Você pode encontrar o código-fonte completo e o histórico de commits no GitHub:
+**[https://github.com/FMachadoLucas/grupo-c-mini-projeto](https://github.com/FMachadoLucas/grupo-c-mini-projeto)**
+
 ## 👥 Integrantes do Grupo
 
 **Alunos:**
