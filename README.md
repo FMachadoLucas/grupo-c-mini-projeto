@@ -73,3 +73,12 @@ Para atender aos requisitos acadêmicos e técnicos do projeto:
 Para garantir a integridade dos dados, foram criadas funções específicas:
 * **Validação de CPF:** Verifica se o CPF inserido possui 11 dígitos numéricos e aplica a lógica de verificação.
 * **Validação de Data:** Impede o cadastro de datas inexistentes (como dia 32 ou mês 13).
+* **Validação de Nome:** Impede a inserção de números ou caracteres inválidos no nome do proprietário, aceitando apenas letras.
+* **Validação de Telefone:** Verifica a quantidade de dígitos (DDD + número) e aplica a verificação de dígitos repetidos (ex: (11) 1111-1111).
+
+### Recursos de Interface e Usabilidade
+Para melhorar a experiência do usuário, o código conta com:
+* **Proteção de saída:** O sistema monitora alterações não salvas (flag dadosAlterados). Se o usuário tentar sair sem salvar, um alerta é exibido perguntando se deseja salvar antes de encerrar.
+* **Busca Visual para Exclusão:** Na opção de apagar terreno, caso o usuário não saiba o ID, o sistema oferece um modo de visualização (mTerreno_ordenado) que exibe os terrenos um a um, permitindo a exclusão interativa.
+* **Tratamento de Buffer:** Uso estratégico de limpeza de buffer (%*c e loops getchar) para evitar erros de leitura e "pulos" de tela indesejados.
+* **Portabilidade:** A função limparTela foi implementada com diretivas de pré-processador (#ifdef _WIN32), funcionando corretamente tanto em Windows (cls) quanto em Linux/macOS (clear).
