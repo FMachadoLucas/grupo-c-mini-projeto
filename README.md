@@ -4,7 +4,7 @@ Este projeto foi desenvolvido como atividade avaliativa da disciplina de Introdu
 
 O desenvolvimento seguiu as instruções de manipular um vetor de ponteiros para estruturas (structs), garantindo otimização de memória e organização modular do código.
 
-🎥 Vídeo de apresentação:
+🎥 Vídeo de apresentação: https://youtu.be/E6bQbTIXpnQ
 
 ## 🔗 Link do Repositório
 
